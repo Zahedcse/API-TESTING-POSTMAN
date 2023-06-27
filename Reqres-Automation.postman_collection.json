@@ -1,0 +1,1071 @@
+{
+	"info": {
+		"_postman_id": "152f5eac-95cc-47bc-8499-73de561f5fcd",
+		"name": "Reqres-Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27882012"
+	},
+	"item": [
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// This HTML Template can show the data in visualize Tab in a Table\r",
+									"var template = `\r",
+									"        <table bgcolor=\"#F5654e\">\r",
+									"            <tr> \r",
+									"                <td>Email</td>\r",
+									"                <td>First Name</td>\r",
+									"                <td>Last Name</td>\r",
+									"                <td>Avatar</td>\r",
+									"            </tr>\r",
+									"            {{#each response.data}}\r",
+									"                <tr>\r",
+									"                    <td>{{email}}</td>\r",
+									"                    <td>{{first_name}}</td>\r",
+									"                    <td>{{last_name}}</td>\r",
+									"                    <td>{{avatar}}</td>\r",
+									"                </tr>\r",
+									"            {{/each}}\r",
+									"        </table>\r",
+									"`;\r",
+									"\r",
+									"pm.visualizer.set(template, {\r",
+									"    response : pm.response.json()\r",
+									"});\r",
+									"const resp = pm.response.json();\r",
+									"\r",
+									"// Cheking the status code\r",
+									"pm.test(\"Response Code is 200\", ()=>{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Checking the amount of response and array data\r",
+									"\r",
+									"pm.test(\"Response Body has expected Values\", ()=>{\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody.page).to.eql(1);\r",
+									"    pm.expect(responseBody.total).to.eql(12);\r",
+									"    pm.expect(responseBody.total_pages).to.eql(6);\r",
+									"    pm.expect(responseBody.data).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"// Checking the response has expected Property\r",
+									"\r",
+									"pm.test(\"Response has ID, first_name, last_name, email\", ()=>{\r",
+									"   const data = resp.data;\r",
+									" data.forEach((item)=>{\r",
+									"     pm.expect(item).to.have.property('email');\r",
+									"     pm.expect(item).to.have.property('id');\r",
+									"     pm.expect(item).to.have.property('first_name');\r",
+									"     pm.expect(item).to.have.property('last_name');\r",
+									" })\r",
+									"});\r",
+									"\r",
+									"// Measure the response time within its acceptable nlimits\r",
+									"\r",
+									"pm.test('Response time is within the acceptable limits',()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"",
+									"// Setting the global Variables",
+									"pm.globals.set('global_url', '2');",
+									"",
+									"// Setting the collection variables",
+									"pm.collectionVariables.set('var_collect', '5');",
+									"",
+									"// Setting the Environment Variable",
+									"pm.environment.set('id', '6'); ",
+									"",
+									"// Setting the local variable",
+									"pm.variables.set('local_var', 'www.swapi.dev');",
+									"",
+									"",
+									"// Setting the headers",
+									"",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: \"application/json\"",
+									"})",
+									"",
+									"request.headers[\"Content-Type\"] = \"application/json\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/?per_page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "name:asc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a single users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The status code is 200\", ()=>{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Checking the response data Types\r",
+									"pm.test('Response Data Types are okay', ()=>{\r",
+									"    pm.expect(resp).to.be.an('object');  \r",
+									"    pm.expect(resp.data.first_name).to.be.a('string');\r",
+									"    pm.expect(resp.data.id).to.be.a('number');\r",
+									"    pm.expect(resp.data.last_name).to.be.a('string');\r",
+									"    pm.expect(resp.data.email).to.be.a('string');\r",
+									"    pm.expect(resp.data.avatar).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"// Checking the response has the expected Items\r",
+									"pm.test(\"Response has expected items\", ()=>{\r",
+									"    pm.expect(resp.data).to.have.property('id');\r",
+									"    pm.expect(resp.data).to.have.property('first_name');\r",
+									"    pm.expect(resp.data).to.have.property('last_name');\r",
+									"    pm.expect(resp.data).to.have.property('email');\r",
+									"    pm.expect(resp.data).to.have.property('avatar');\r",
+									"});\r",
+									"\r",
+									"// Checking the response received in expected time\r",
+									"pm.test(\"Response Received in expected Time\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Checking the response body contains Text\r",
+									"pm.test(\"Body Contains string\", ()=>{\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"\r",
+									"// Checking the Schema Validation\r",
+									"var schema={\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"data\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"email\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"first_name\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"last_name\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"avatar\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"email\",\r",
+									"        \"first_name\",\r",
+									"        \"last_name\",\r",
+									"        \"avatar\"\r",
+									"      ]\r",
+									"    },\r",
+									"    \"support\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"url\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"text\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"url\",\r",
+									"        \"text\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"data\",\r",
+									"    \"support\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Schema is valid', ()=>{\r",
+									"    pm.expect(tv4.validate('schema', 'resp')).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"",
+									"// Setting the global Variables",
+									"pm.globals.set('global_url', '2');",
+									"",
+									"// Setting the collection variables",
+									"pm.collectionVariables.set('var_collect', '5');",
+									"",
+									"// Setting the Environment Variable",
+									"pm.environment.set('id', '6'); ",
+									"",
+									"",
+									"",
+									"// To unset the variables",
+									"// pm.globals.unset('')"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a user - put",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// https://reqres.in/api/users\r",
+									"\r",
+									"const myRequest = {\r",
+									"    method : 'PUT',\r",
+									"    url: 'https://reqres.in/api/users/2',\r",
+									"    header: {\r",
+									"        'Content-Type' : 'application/Json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"name\": 'Zahed',\r",
+									"            'job' : 'SQA'\r",
+									"        })\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(myRequest, (err, response)=>{\r",
+									"    pm.test('Updated Successfully', ()=>{\r",
+									"        pm.expect(err).to.be.null;\r",
+									"        pm.expect(response.code).to.have.oneOf([200,201]);\r",
+									"        pm.expect(response).to.have.property('status', 'OK');\r",
+									"        pm.expect(response.responseTime).to.be.below(700);\r",
+									"    })\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const id = 2;\r",
+									"const myRequest = {\r",
+									"    method: \"DELETE\",\r",
+									"    url: `https://reqres.in/api/users/${id}`,\r",
+									"    headers: {\r",
+									"        'Content-Type' : 'application/Json'\r",
+									"    }\r",
+									"\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(myRequest, (err, response)=>{\r",
+									"    pm.test('Deletion Successful', ()=>{\r",
+									"        pm.expect(err).to.be.null;\r",
+									"        pm.expect(response.code).to.equal(204);\r",
+									"    })\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Setting a Local variable",
+									"pm.variables.set('id', '2');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/{{id}}",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a user - Patch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// https://reqres.in/api/users",
+									"",
+									"const myRequest = {",
+									"    method : 'PATCH',",
+									"    url: 'https://reqres.in/api/users/2',",
+									"    header: {",
+									"        'Content-Type' : 'application/Json'",
+									"    },",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: JSON.stringify({",
+									"            \"name\": 'Zahed',",
+									"            'job' : 'SQA'",
+									"        })",
+									"    }",
+									"};",
+									"",
+									"pm.sendRequest(myRequest, (err, response)=>{",
+									"    pm.test('Updated Successfully', ()=>{",
+									"        pm.expect(err).to.be.null;",
+									"        pm.expect(response.code).to.have.oneOf([200,201]);",
+									"        pm.expect(response).to.have.property('status', 'OK');",
+									"        pm.expect(response.responseTime).to.be.below(700);",
+									"    })",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Sayed\",\r\n    \"job\" : \"student\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const myRequest = {\r",
+									"    method: 'POST',\r",
+									"    url: 'https://reqres.in/api/users',\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"name\": \"Sayema\",\r",
+									"            \"job\": \"Junior SQA\"\r",
+									"        })\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(myRequest, (err, response) => {\r",
+									"    pm.test(\"User Creation Successful\", () => {\r",
+									"        pm.expect(err).to.be.null;\r",
+									"        pm.expect(response.code).to.have.oneOf([200, 201]);\r",
+									"        pm.expect(response).to.have.property('status', 'Created');\r",
+									"        pm.expect(pm.response.responseTime).to.below(800);\r",
+									"\r",
+									"        // Accessing ID and created at values\r",
+									"        const responseBody = pm.response.json();\r",
+									"        const userId = responseBody.id;\r",
+									"        const createdAt = responseBody.createdAt;\r",
+									"\r",
+									"        // Printing the ID and Created_at from the response\r",
+									"        console.log('ID:', userId);\r",
+									"        console.log('Created At:', createdAt);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"",
+									"// Set the headers",
+									"pm.request.headers.add({ ",
+									"        key: \"Content-Type\", value: \"application/Json\" ,",
+									"    });",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Zahed\",\r\n    \"Job\" : \"SQA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-users-3 sec-delay",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const url = \"https://reqres.in/api\";",
+									"const myRequest = {",
+									"  method: 'GET',",
+									"  url: `${url}/users`,",
+									"  queryParams: {",
+									"    delay: '3',",
+									"  },",
+									"};",
+									"",
+									"pm.sendRequest(myRequest, (err, response) => {",
+									"  pm.test('Request is Successful', () => {",
+									"    pm.expect(err).to.be.null;",
+									"    pm.expect(response.code).to.equal(200);",
+									"    pm.expect(response).to.have.property('status', 'OK');",
+									"  });",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"",
+									"pm.sendRequest('https://reqres.in/api/users?delay=3', (err, response) => {",
+									"    pm.expect(err).to.be.null;",
+									"    pm.expect(response.code).to.equal(200);",
+									"    pm.expect(response).to.have.property('status', 'OK');",
+									"});",
+									"",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: \"application/json\"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users?delay=3&per_page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "delay",
+									"value": "3"
+								},
+								{
+									"key": "per_page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register a User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// https://reqres.in/api/register\r",
+									"const myRequest = {\r",
+									"    method : \"POST\",\r",
+									"    url: 'https://reqres.in/api/register',\r",
+									"    header: {\r",
+									"        'Content-type' : 'application/Json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw : {\r",
+									"            'email' : 'eve.holt@reqres.in',\r",
+									"            'password' : 'pistol'\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(myRequest, (err, response)=>{\r",
+									"    pm.test('Registration Successful', ()=>{\r",
+									"        pm.expect(err).to.be.null;\r",
+									"        pm.expect(response.code).to.have.oneOf([200,201]);\r",
+									"        pm.expect(response).to.have.property('status', 'OK')\r",
+									"    });\r",
+									"    // If got any error it will print in the console\r",
+									"    if (resp.error) {\r",
+									"        console.log(resp.error);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Validate the ID and Token created from this api\r",
+									"const resp  = pm.response.json();\r",
+									"pm.test('Id should be a positive Integer', ()=>{\r",
+									"    pm.expect(resp.id).to.be.a('number');\r",
+									"    pm.expect(resp.id).to.be.a.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token should be a String\", ()=>{\r",
+									"    pm.expect(resp.token).to.be.a('string');\r",
+									"    pm.expect(resp.token).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// Print the newly created ID and Token\r",
+									"console.log('ID: ', resp.id);\r",
+									"console.log('Token: ', resp.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"",
+									"// Pre-request script",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: \"application/json\"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\", \r\n    \"password\": \"pistol\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration-Failed",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"\r",
+									"const myRequest = {\r",
+									"    method: 'POST',\r",
+									"    url: 'https://reqres.in/api/register',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            'email': 'eve.holt@reqres.in'\r",
+									"        })\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(myRequest, (err, response) => {\r",
+									"    pm.test('Request is successfully posted', () => {\r",
+									"        pm.expect(err).to.be.null;\r",
+									"        pm.expect(response.code).to.have.oneOf([200, 201]);\r",
+									"        pm.expect(response).to.have.property('status', 'OK');\r",
+									"    });\r",
+									"\r",
+									"    if (resp.error) {\r",
+									"        console.log(resp.error);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"// Setting the local variable",
+									"pm.variables.set('login_url', 'https://reqres.in/api/login');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// const resp = pm.response.json();\r",
+									"\r",
+									"const myRequest = {\r",
+									"    method : 'POST',\r",
+									"    url : pm.variables.get('login_url'),\r",
+									"    header: {\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode : 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"email\": \"eve.holt@reqres.in\",\r",
+									"            \"password\": \"cityslicka\"\r",
+									"        })\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(myRequest, (err, response)=>{\r",
+									"    pm.test('Login Successful', ()=>{\r",
+									"        pm.expect(err).to.be.null;\r",
+									"        pm.expect(response.code).to.have.oneOf([200, 201]);\r",
+									"        pm.expect(response).to.have.property('status', \"OK\");\r",
+									"        pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"    });\r",
+									"    const resp = response.json();\r",
+									"    // Cheking if have any error\r",
+									"    if(resp.error){\r",
+									"        console.log(resp.error);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"cityslicka\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/login",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authorization-example",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear();\r",
+							"console.log(pm.globals.get(\"url_req\"));\r",
+							"\r",
+							"pm.collectionVariables.set('Token', 'ATATT3xFfGF0wqdS9HZItU6OXVYD1e90OwWTwawlj_jx1b1t09oAO1U5FNtTvw6ZcH07xxu8XlKzRhBYXnrf4ok5MCssKTKKaz-bOSinvaICY-giVPurz843x5q3Bn6kx-FKwzP46WaX9QTQwjam_Dqo-1fGy_4vVUMNpP7kgCTA19XYd32mbmQ=DD02CD98');"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const myRequest = {\r",
+							"    method: \"GET\",\r",
+							"    url: \"https://tuliptech-zahed.atlassian.net/rest/api/3/project/search\",\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json',\r",
+							"    },\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(myRequest, (err, response) => {\r",
+							"    pm.test('Get Results Successfully', () => {\r",
+							"        var resp = pm.response.json();\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(response.code).to.be.oneOf([200, 201]);\r",
+							"        pm.expect(response).to.have.property('status', 'OK');\r",
+							"        pm.expect(resp.total).to.equal(1);\r",
+							"        pm.expect(resp.maxResults).to.eql(50);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/project/search?keys=LBT",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						"search"
+					],
+					"query": [
+						{
+							"key": "maxResults",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "keys",
+							"value": "LBT"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "var_collect",
+			"value": ""
+		},
+		{
+			"key": "Auth_Token",
+			"value": "ATATT3xFfGF0uR9JYU8ml2WxnKJcbLGbAq7STAfDoUDAUt3l9QwsVNiwgrNOjzj9nG0-jUc6BFnXTcfnYv291mIaOnT50tEAZPNudc1d46scYYljwEK_XZZafRlk4mu47dceAeV_bh6r_VmCMXqQkkrgI7q47DPt8COvpM-QY8j4cHKp4t2tZS0=6FCFD6E0"
+		},
+		{
+			"key": "Token",
+			"value": ""
+		}
+	]
+}
