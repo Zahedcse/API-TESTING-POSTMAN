@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "9d2557d5-07d7-4e30-a51a-9cb9e482651d",
+		"name": "Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27882012",
+		"_collection_link": "https://orange-trinity-481100.postman.co/workspace/API_Testing~8198a2df-641a-41c7-ae0b-e5e766070d6d/collection/27882012-9d2557d5-07d7-4e30-a51a-9cb9e482651d?action=share&creator=27882012&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Javascript-array",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear();\r",
+							"console.log(pm.globals.get(\"url_req\"));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// pm.test(\"Status code is 200\", function () {\r",
+							"//     pm.response.to.have.status(200);\r",
+							"// });\r",
+							"\r",
+							"// Arrow Functions\r",
+							"\r",
+							"// let addition = (a,b)=> a+b;\r",
+							"// console.log(addition(29,29));\r",
+							"\r",
+							"// Callback Functions\r",
+							"\r",
+							"// let multiply = (a,b)=>console.log(a*b);\r",
+							"// let add = (a, b)=> console.log(a+b);\r",
+							"\r",
+							"// function test(testname, callbackfunction, num1, num2){\r",
+							"//     console.log(testname);\r",
+							"//     callbackfunction(num1, num2)\r",
+							"// }\r",
+							"\r",
+							"// test(\"This is addition test\", add, 12, 45);\r",
+							"// test(\"This is multiplication test\", multiply, 15, 5);\r",
+							"\r",
+							"\r",
+							"// pm.test(\"Your test name\", function () {\r",
+							"//     var jsonData = pm.response.json();\r",
+							"//     pm.expect(jsonData.value).to.eql(100);\r",
+							"// });\r",
+							"\r",
+							"const students = ['Josh', \"Tom\" , \"Mary\", \"Sam\"];\r",
+							"// console.log(students.length);\r",
+							"console.log(students.pop());\r",
+							"console.log(students.length);\r",
+							"console.log(students.sort());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_req}}/users/2",
+					"host": [
+						"{{url_req}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Javascript-Objects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// let studentName = \"John\";\r",
+							"// let age = 16;\r",
+							"// let year = 10;\r",
+							"\r",
+							"const student = {\r",
+							"    studentName: \"Zahed\",\r",
+							"    age: 26,\r",
+							"    year: 36\r",
+							"};\r",
+							"\r",
+							"console.log(student.studentName);\r",
+							"// console.log(student);\r",
+							"\r",
+							"console.log(student.age);\r",
+							"\r",
+							"console.log(student[\"year\"]);\r",
+							"\r",
+							"\r",
+							"// Nested Objects in Javascripts\r",
+							"\r",
+							"const Employee = {\r",
+							"    name: \"Zahed Alam\",\r",
+							"    age: 26,\r",
+							"    year: 64,\r",
+							"    address: {\r",
+							"        vill: \"Charsaha Bhikari\",\r",
+							"        'Post Office': \"Kasari Pukur\",\r",
+							"        'Police Station': \"Sonagazi\",\r",
+							"        \"District\": \"Feni\"\r",
+							"    },\r",
+							"\r",
+							"    welcome: function () {\r",
+							"        console.log(`Welcome to the TulipTech ${this.name}`);\r",
+							"    }\r",
+							"\r",
+							"};\r",
+							"\r",
+							"\r",
+							"console.log(Employee['name', 'age', 'address']['vill']);\r",
+							"// console.log(Employee.address.vill);\r",
+							"// Employee.gender = 'Male';\r",
+							"// // console.log(Employee);\r",
+							"\r",
+							"Employee.welcome();\r",
+							"\r",
+							"let EmployeeJson = JSON.stringify(Employee);\r",
+							"console.log(EmployeeJson);\r",
+							"let student_obj = JSON.parse(EmployeeJson);\r",
+							"console.log(student_obj.name);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_req}}/users/2",
+					"host": [
+						"{{url_req}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Json-stringify",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// let studentName = \"John\";\r",
+							"// let age = 16;\r",
+							"// let year = 10;\r",
+							"\r",
+							"const student = {\r",
+							"    studentName: \"Zahed\",\r",
+							"    age : 26,\r",
+							"    year : 36\r",
+							"};\r",
+							"\r",
+							"console.log(student.studentName);\r",
+							"// console.log(student);\r",
+							"\r",
+							"console.log(student.age);\r",
+							"\r",
+							"console.log(student[\"year\"]);\r",
+							"\r",
+							"\r",
+							"// Nested Objects in Javascripts\r",
+							"\r",
+							"const Employee = {\r",
+							"    name: \"Zahed Alam\",\r",
+							"    age : 26,\r",
+							"    year : 64,\r",
+							"    address: {\r",
+							"        vill: \"Charsaha Bhikari\",\r",
+							"        'Post Office' : \"Kasari Pukur\",\r",
+							"        'Police Station' : \"Sonagazi\",\r",
+							"        \"District\" : \"Feni\"\r",
+							"    },\r",
+							"\r",
+							"    welcome: function(){\r",
+							"        console.log(`Welcome to the TulipTech ${this.name}`);\r",
+							"    }\r",
+							"\r",
+							"};\r",
+							"\r",
+							"\r",
+							"console.log(Employee['name', 'age', 'address']['vill']);\r",
+							"// console.log(Employee.address.vill);\r",
+							"// Employee.gender = 'Male';\r",
+							"// // console.log(Employee);\r",
+							"\r",
+							"Employee.welcome();\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_req}}/users/2",
+					"host": [
+						"{{url_req}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Json-Parse",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// Nested Objects in Javascripts\r",
+							"\r",
+							"const Employee = {\r",
+							"    name: \"Zahed Alam\",\r",
+							"    age : 26,\r",
+							"    year : 64,\r",
+							"    address: {\r",
+							"        vill: \"Charsaha Bhikari\",\r",
+							"        'Post Office' : \"Kasari Pukur\",\r",
+							"        'Police Station' : \"Sonagazi\",\r",
+							"        \"District\" : \"Feni\"\r",
+							"    },\r",
+							"\r",
+							"    welcome: function(){\r",
+							"        console.log(`Welcome to the TulipTech ${this.name}`);\r",
+							"    }\r",
+							"\r",
+							"};\r",
+							"\r",
+							"\r",
+							"console.log(Employee['name', 'age', 'address']['vill']);\r",
+							"// console.log(Employee.address.vill);\r",
+							"// Employee.gender = 'Male';\r",
+							"// // console.log(Employee);\r",
+							"\r",
+							"Employee.welcome();\r",
+							"\r",
+							"\r",
+							"let EmployeeJson = JSON.stringify(Employee);\r",
+							"console.log(EmployeeJson);\r",
+							"let student_obj = JSON.parse(EmployeeJson);\r",
+							"console.log(student_obj.name);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_req}}/users/2",
+					"host": [
+						"{{url_req}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Javascriprts-array",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//  const worker = {\r",
+							"//      name : \"Md Zahed Alam\",\r",
+							"//      age : 26,\r",
+							"//      email: 'zahedalam1001@gmail.com',\r",
+							"//      phone: '01964765746',\r",
+							"//      address: {\r",
+							"//          'vill' : \"Charsaha Bhikari\",\r",
+							"//          'care of' : \"Abdur Razzak er bari\",\r",
+							"//          'Post Office' : \"kasari Pukur\",\r",
+							"//          'Police Station' : \"Sonagazi\",\r",
+							"//          'District' : \"Feni\"\r",
+							"//      },\r",
+							"\r",
+							"//  };\r",
+							"\r",
+							"//  console.log(worker.name);\r",
+							"//  console.log(worker);\r",
+							"//  let workerJson = JSON.stringify(worker);\r",
+							"//  console.log(workerJson); \r",
+							"//  worker_obj = JSON.parse(workerJson);\r",
+							"//  console.log(worker_obj.age);\r",
+							"\r",
+							"// Working with  Arrays\r",
+							"\r",
+							"const students = ['rama', 'Steve', 'tom' , 'Jahed'];\r",
+							"console.log(students);\r",
+							"\r",
+							"console.log(students[2]);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_req}}/users/2",
+					"host": [
+						"{{url_req}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
