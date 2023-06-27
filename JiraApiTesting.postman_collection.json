@@ -1,0 +1,584 @@
+{
+	"info": {
+		"_postman_id": "3c364b56-8122-44e4-8393-c6fed0f0001d",
+		"name": "JiraApiTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27882012",
+		"_collection_link": "https://orange-trinity-481100.postman.co/workspace/API_Testing~8198a2df-641a-41c7-ae0b-e5e766070d6d/collection/27882012-3c364b56-8122-44e4-8393-c6fed0f0001d?action=share&creator=27882012&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Issue-Creation",
+			"item": [
+				{
+					"name": "Get-IssueType",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{api_token}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "zahedalam1002@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/issuetype/project?projectId=10001",
+							"protocol": "https",
+							"host": [
+								"tuliptech-zahed",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"issuetype",
+								"project"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "10001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Assignable_User",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{api_token}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "zahedalam1002@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/user/assignable/multiProjectSearch?projectKeys=LBT",
+							"protocol": "https",
+							"host": [
+								"tuliptech-zahed",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"user",
+								"assignable",
+								"multiProjectSearch"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "query",
+									"disabled": true
+								},
+								{
+									"key": "projectKeys",
+									"value": "LBT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Issue-Creation",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{api_token}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "zahedalam1002@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": {\r\n        \"issuetype\": {\r\n        \"id\": \"10008\"\r\n        },\r\n        \"project\": {\r\n        \"id\": \"10001\"\r\n        },\r\n        \"reporter\": {\r\n        \"id\": \"712020:73d21bd9-0d19-4287-bc22-c6ba33e02f8c\"\r\n        },\r\n        \"summary\": \"Attempt to create an issue In Jira\"\r\n    },\r\n    \"update\": {}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/issue",
+							"protocol": "https",
+							"host": [
+								"tuliptech-zahed",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"issue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get-Issue",
+			"item": [
+				{
+					"name": "GetIssue",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{api_token}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "zahedalam1002@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/issue/:issueId",
+							"protocol": "https",
+							"host": [
+								"tuliptech-zahed",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"issue",
+								":issueId"
+							],
+							"variable": [
+								{
+									"key": "issueId",
+									"value": "10002"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JiraInstance",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api_token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/instance/license",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"instance",
+						"license"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://tuliptech-zahed.atlassian.net/rest/api/3/instance/license",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api_token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/instance/license",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"instance",
+						"license"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Projects",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear();\r",
+							"console.log(pm.globals.get(\"url_req\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// pm.test(\"Status code is 200\", function() {\r",
+							"//     pm.response.to.have.status(200);\r",
+							"// });\r",
+							"// pm.test(\"Max results is 50\", function () {\r",
+							"//     var jsonData = pm.response.json();\r",
+							"//     pm.expect(jsonData.maxResults).to.eql(50);\r",
+							"// });\r",
+							"/*\r",
+							"var name = \"Zahed Alam\";\r",
+							"var lastname = \"Zahi\";\r",
+							"\r",
+							"console.log(\"The name is : \", name, lastname);\r",
+							"*/\r",
+							"\r",
+							"// function demofunction(){\r",
+							"//     console.log('Hello I am a Function');\r",
+							"// };\r",
+							"\r",
+							"// demofunction()\r",
+							"\r",
+							"\r",
+							"// function rcvfunction(course){\r",
+							"//     console.log(`Welcome to the RCV Academy ${course} `);\r",
+							"// }\r",
+							"\r",
+							"// rcvfunction(\"Java\")\r",
+							"// rcvfunction(\"Python\")\r",
+							"\r",
+							"\r",
+							"// function TulipTech(Service) {\r",
+							"//     console.log(`Tulip Tech provides ${Service}`);\r",
+							"// }\r",
+							"\r",
+							"// TulipTech(\"Website Development\");\r",
+							"// TulipTech(\"Cyber Security\");\r",
+							"// TulipTech(\"Cutting edge services to the customers\");\r",
+							"\r",
+							"function addition(a,b){\r",
+							"    return a+b;\r",
+							"}\r",
+							"\r",
+							"addition(10, 15);\r",
+							"\r",
+							"let x = 100;\r",
+							"let y = 150;\r",
+							"\r",
+							"console.log(`The result of ${x} and ${y} is ${addition(x,y)}`);\r",
+							"\r",
+							"// Errow functions in Javascript\r",
+							"\r",
+							"// let addition = (a,b) =>{\r",
+							"//     console.log(a,b);\r",
+							"//     return a+b;\r",
+							"// }\r",
+							"\r",
+							"let multiply = (a,b) => a*b;\r",
+							"\r",
+							"console.log(multiply(2,24))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api_token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/project/search?keys=LBT",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						"search"
+					],
+					"query": [
+						{
+							"key": "maxResults",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "keys",
+							"value": "LBT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_single_project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api_token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/project/:projectIdOrKey",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						":projectIdOrKey"
+					],
+					"variable": [
+						{
+							"key": "projectIdOrKey",
+							"value": "LBT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api_token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"assigneeType\": \"PROJECT_LEAD\",\r\n  \"avatarId\": 10316,\r\n  \"categoryId\": 10005,\r\n  \"description\": \"Cloud migration initiative\",\r\n  \"issueSecurityScheme\": 10006,\r\n  \"key\": \"EX\",\r\n  \"leadAccountId\": \"712020:73d21bd9-0d19-4287-bc22-c6ba33e02f8c\",\r\n  \"name\": \"Example-Project\",\r\n  \"notificationScheme\": 10021,\r\n  \"permissionScheme\": 10011,\r\n  \"projectTemplateKey\": \"com.atlassian.jira-core-project-templates:jira-core-simplified-process-control\",\r\n  \"projectTypeKey\": \"business\",\r\n  \"url\": \"http://atlassian.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/project",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-projects-status",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api_token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "zahedalam1002@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://tuliptech-zahed.atlassian.net/rest/api/3/project/:projectIdOrKey/statuses",
+					"protocol": "https",
+					"host": [
+						"tuliptech-zahed",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						":projectIdOrKey",
+						"statuses"
+					],
+					"variable": [
+						{
+							"key": "projectIdOrKey",
+							"value": "LBT"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "api_token",
+			"value": "ATATT3xFfGF0NHqVtgioYyuZ_LWILMPqDr73tdQg3IyIRv2C-Cf0ERR9yAIu1ZW7tfI5q6nObiTt3DWvVKNRD28-X_bqV1CbsaqFzIPZ9RVwS_CQC7B0NTLdrcPkcP1t_ZnmA5ge-sht4rPaXZaB0ZTI2MQ3dylaGThwJLZh9I4HL-v9k2KN8ek=4AF6A984"
+		}
+	]
+}
